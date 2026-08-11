@@ -16,15 +16,15 @@
 
 ## 📌 Overview
 
-This project implements an **end-to-end sentiment classification pipeline** that compares traditional machine learning with modern transformer-based NLP models.
+This project implements an end-to-end **Natural Language Processing (NLP) pipeline** for binary sentiment classification, comparing traditional machine learning approaches with modern transformer-based architectures.
 
-The project systematically evaluates three approaches:
+The project evaluates three different modeling approaches:
 
 - 📊 **TF-IDF + Logistic Regression**
 - 🧊 **Frozen BERT**
 - 🔥 **Fully Fine-Tuned BERT**
 
-The pipeline goes beyond basic model training by incorporating **data validation, reproducible experiments, hyperparameter search, early stopping, checkpoint restoration, model comparison, error analysis, and Streamlit deployment**.
+The complete workflow includes data validation, preprocessing, reproducible training, hyperparameter experimentation, early stopping, checkpoint restoration, model comparison, error analysis, and interactive deployment using Streamlit.
 
 ---
 
@@ -37,7 +37,7 @@ The objective is to classify an English sentence into one of two sentiment categ
 | `0` | ❌ Negative |
 | `1` | ✅ Positive |
 
-The project investigates how contextual representations from BERT compare against traditional TF-IDF-based representations for sentiment classification.
+The project investigates how contextual representations learned by BERT compare with traditional TF-IDF-based text representations for sentiment classification.
 
 ---
 
@@ -45,15 +45,15 @@ The project investigates how contextual representations from BERT compare agains
 
 - 🧹 Automated dataset validation and preprocessing
 - 📊 TF-IDF + Logistic Regression baseline
-- 🧊 Frozen BERT feature-extraction approach
-- 🔥 Fully fine-tuned BERT classifier
+- 🧊 Frozen BERT feature-extraction model
+- 🔥 Fully Fine-Tuned BERT classifier
 - 🔍 Learning-rate experimentation
 - 🔢 Epoch-count experimentation
 - ⏹️ Validation-based early stopping
 - 💾 Best-model checkpoint restoration
 - 🎲 Reproducible training with fixed random seeds
 - 📏 Dynamic BERT sequence-length selection
-- ⚡ CUDA mixed-precision support
+- ⚡ CUDA mixed-precision training support
 - 📈 Comprehensive model evaluation
 - 🔎 Per-example error analysis
 - 🌐 Interactive Streamlit inference application
@@ -72,14 +72,56 @@ A classical NLP pipeline is implemented as the baseline model.
                        ▼
               ┌─────────────────┐
               │ TF-IDF Vectorizer│
-              │    1–2 Grams     │
+              │     1–2 Grams    │
               └────────┬────────┘
                        │
                        ▼
               ┌─────────────────┐
-              │ Logistic         │
-              │ Regression       │
+              │ Logistic        │
+              │ Regression      │
               └────────┬────────┘
                        │
                        ▼
               Positive / Negative
+🔹 Purpose
+
+The baseline provides an efficient and interpretable benchmark for evaluating whether transformer-based contextual representations improve sentiment classification performance.
+
+# 2️⃣ Frozen BERT
+In this approach, the pretrained BERT encoder is kept frozen while only the classification head is trained.
+```text
+                 Input Text
+                     │
+                     ▼
+              ┌───────────────┐
+              │ BERT Tokenizer│
+              └──────┬────────┘
+                     │
+                     ▼
+              ┌───────────────┐
+              │ Pretrained    │
+              │ BERT Encoder  │
+              │    FROZEN     │
+              └──────┬────────┘
+                     │
+                     ▼
+              ┌───────────────┐
+              │ CLS Embedding │
+              └──────┬────────┘
+                     │
+                     ▼
+              ┌───────────────┐
+              │ Dropout       │
+              └──────┬────────┘
+                     │
+                     ▼
+              ┌───────────────┐
+              │ Linear Head   │
+              └──────┬────────┘
+                     │
+                     ▼
+              Positive / Negative
+
+🔹 Purpose
+
+This experiment measures the effectiveness of pretrained BERT representations without updating the transformer encoder parameters.
