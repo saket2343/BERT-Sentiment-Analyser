@@ -1,0 +1,17 @@
+{
+  "model_name": "bert-base-uncased",
+  "num_labels": 2,
+  "dropout": 0.2,
+  "freeze_bert": false,
+  "max_length": 40,
+  "label_map": {
+    "0": "Negative",
+    "1": "Positive"
+  },
+  "learning_rate": 2e-05,
+  "epochs_configured": 4,
+  "epochs_run": 4,
+  "best_val_f1": 1.0,
+  "best_val_accuracy": 1.0,
+  "best_val_loss": 0.00024818324096418954
+}
